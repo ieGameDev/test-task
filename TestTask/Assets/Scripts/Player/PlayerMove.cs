@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Camera;
+﻿using Assets.Scripts.Infrastructure.Bootstrap;
 using Assets.Scripts.Infrastructure.Services.Input;
 using UnityEngine;
 
@@ -13,23 +13,10 @@ namespace Assets.Scripts.Player
         [SerializeField] private CharacterController _characterController;
 
         private IInputService _inputService;
-        private UnityEngine.Camera _camera;
 
         private void Awake()
         {
-            _inputService = new StandaloneInput();
-        }
-
-        private void Start()
-        {
-            _camera = UnityEngine.Camera.main;
-
-            CameraFollow();
-        }
-
-        private void CameraFollow()
-        {
-            _camera.GetComponent<CameraFollow>().Follow(gameObject);
+            _inputService = Game.InputService;
         }
 
         private void Update()
@@ -51,6 +38,6 @@ namespace Assets.Scripts.Player
             float mouseX = _inputService.RotateX;
             Vector3 rotation = new Vector3(0, mouseX, 0) * _rotationSpeed;
             transform.Rotate(rotation);
-        }
+        }       
     }
 }
