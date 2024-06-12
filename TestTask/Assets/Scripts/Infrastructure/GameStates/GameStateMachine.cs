@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrastructure.Bootstrap;
+using Assets.Scripts.Infrastructure.Services;
 using Assets.Scripts.Logic;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace Assets.Scripts.Infrastructure.GameStates
         private Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen, DependencyContainer container)
         {
             _states = new Dictionary<Type, IExitableState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, container),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen, container.Single<IGameFactory>()),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }

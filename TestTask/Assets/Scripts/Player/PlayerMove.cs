@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Infrastructure.Bootstrap;
+﻿using Assets.Scripts.Infrastructure.Services;
 using Assets.Scripts.Infrastructure.Services.Input;
 using UnityEngine;
 
@@ -14,10 +14,8 @@ namespace Assets.Scripts.Player
 
         private IInputService _inputService;
 
-        private void Awake()
-        {
-            _inputService = Game.InputService;
-        }
+        private void Awake() => 
+            _inputService = DependencyContainer.Container.Single<IInputService>();
 
         private void Update()
         {
