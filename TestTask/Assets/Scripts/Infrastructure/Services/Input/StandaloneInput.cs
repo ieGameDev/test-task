@@ -6,8 +6,14 @@ namespace Assets.Scripts.Infrastructure.Services.Input
     {
         public override Vector2 Axis => DescktopAxis();
         public override float RotateX => MouseRotate();
+        public override bool AttackButtonPressed => MouseAttack();
 
-        private static float MouseRotate() => 
+        private static bool MouseAttack()
+        {
+            return UnityEngine.Input.GetButtonDown(AttackButton);
+        }
+
+        private static float MouseRotate() =>
             UnityEngine.Input.GetAxis(MouseXInput);
 
         private static Vector2 DescktopAxis() =>

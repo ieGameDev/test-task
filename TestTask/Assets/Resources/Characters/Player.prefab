@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7138014266488946609}
   - component: {fileID: 3738222763101002577}
   - component: {fileID: 1508027298057433101}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,8 +108,7 @@ GameObject:
   - component: {fileID: 7861992326146594175}
   - component: {fileID: 8083315753261417037}
   - component: {fileID: 439256676371368783}
-  - component: {fileID: 3261568066108792879}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2592991964396382819}
   m_LocalRotation: {x: -0.4911557, y: -0, z: -0, w: 0.87107176}
-  m_LocalPosition: {x: 0, y: -0.14600003, z: 1.1540004}
+  m_LocalPosition: {x: 0, y: -0.14600003, z: 0.98}
   m_LocalScale: {x: 0.096775584, y: 0.12371228, z: 0.40917104}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,19 +180,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3261568066108792879
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2592991964396382819}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3741770109153749653
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7335878330692142124}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,6 +210,7 @@ Transform:
   m_Children:
   - {fileID: 2623683552759484860}
   - {fileID: 7861992326146594175}
+  - {fileID: 2900093172568086568}
   m_Father: {fileID: 7170485293456940297}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -241,9 +228,10 @@ GameObject:
   - component: {fileID: 463099884505650199}
   - component: {fileID: 657448368607834721}
   - component: {fileID: -7061668530855698093}
-  m_Layer: 0
+  - component: {fileID: 8367927461447646052}
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -323,7 +311,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4265862592919253914}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -362,6 +350,22 @@ MonoBehaviour:
   _playerSpeed: 5
   _rotationSpeed: 5
   _characterController: {fileID: 657448368607834721}
+--- !u!114 &8367927461447646052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4265862592919253914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f7d4dc629858a41b3b2f11d06e303b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackCooldown: 1
+  _bulletSpeed: 15
+  _bulletPrefab: {fileID: 1899827694384486077, guid: 75193a9b7bd65bd47b2641d27b28c795, type: 3}
+  _firePoint: {fileID: 2900093172568086568}
 --- !u!1 &5389016761687286739
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,8 +377,7 @@ GameObject:
   - component: {fileID: 2623683552759484860}
   - component: {fileID: 5916719525269350692}
   - component: {fileID: 1034346209765823075}
-  - component: {fileID: 8554674933240651132}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5389016761687286739}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.3570005}
+  m_LocalPosition: {x: 0, y: 0, z: 1.1830001}
   m_LocalScale: {x: 0.14572, y: 0.18628, z: 0.61611}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -446,19 +449,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8554674933240651132
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5389016761687286739}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5403359148398933462
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +461,7 @@ GameObject:
   - component: {fileID: 6268136375668914590}
   - component: {fileID: 626990555610365294}
   - component: {fileID: 1244550258847441826}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,6 +548,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Center: {x: -0.0000019073495, y: 0, z: 2.842171e-14}
+--- !u!1 &7476287550922513168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2900093172568086568}
+  m_Layer: 9
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2900093172568086568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7476287550922513168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.783}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7335878330692142124}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8049116167602449165
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,7 +591,7 @@ GameObject:
   - component: {fileID: 7026336426221520062}
   - component: {fileID: 1721576909185628596}
   - component: {fileID: 2922644066284836688}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

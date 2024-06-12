@@ -6,5 +6,6 @@ namespace Assets.Scripts.Infrastructure.Services.Input
     {
         Vector2 Axis { get; }
         float RotateX { get; }
+        bool AttackButtonPressed { get; }
     }
 }
