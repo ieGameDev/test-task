@@ -6,17 +6,14 @@ namespace Assets.Scripts.Infrastructure.GameStates
     {
         public GameLoopState(GameStateMachine gameStateMachine)
         {
-
         }
 
         public void Enter()
-        {
-            
+        {            
         }
 
         public void Exit()
-        {
-           
+        {           
         }
     }
 }

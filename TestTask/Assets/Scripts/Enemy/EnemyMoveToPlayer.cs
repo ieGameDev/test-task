@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Infrastructure.Factory;
-using Assets.Scripts.Infrastructure.Services;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
@@ -13,19 +11,15 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private NavMeshAgent _agent;
 
         private Transform _playerTransform;
-        private IGameFactory _gameFactory;
         private EnemyAttack _enemyAttack;
 
-        private void Start()
+        public void Construct(GameObject player)
         {
-            _gameFactory = DependencyContainer.Container.Single<IGameFactory>();
-            _enemyAttack = GetComponent<EnemyAttack>();
-
-            if (_gameFactory.PlayerGameObject != null)
-                InitializePlayerTransform();
-            else
-                _gameFactory.PlayerCreated += PlayerCreated;
+            _playerTransform = player.transform;
         }
+
+        private void Start() => 
+            _enemyAttack = GetComponent<EnemyAttack>();
 
         private void Update()
         {
@@ -52,11 +46,5 @@ namespace Assets.Scripts.Enemy
 
         private bool PlayerNotReached() =>
             Vector3.Distance(_agent.transform.position, _playerTransform.position) >= ShootDistance;
-
-        private void PlayerCreated() =>
-            InitializePlayerTransform();
-
-        private void InitializePlayerTransform() =>
-            _playerTransform = _gameFactory.PlayerGameObject.transform;
     }
 }

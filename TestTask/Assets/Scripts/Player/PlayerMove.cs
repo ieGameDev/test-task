@@ -1,6 +1,8 @@
 ﻿using Assets.Scripts.Infrastructure.Services;
 using Assets.Scripts.Infrastructure.Services.Input;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace Assets.Scripts.Player
@@ -8,6 +10,8 @@ namespace Assets.Scripts.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMove : MonoBehaviour
     {
+        private const string InitialScene = "Initial";
+
         [SerializeField] private float _playerSpeed = 5.0f;
         [SerializeField] private float _rotationSpeed = 10.0f;
         [SerializeField] private CharacterController _characterController;
@@ -21,6 +25,9 @@ namespace Assets.Scripts.Player
         {
             Move();
             Rotate();
+
+            if (_characterController.transform.position.y <= -5)
+                SceneManager.LoadScene(InitialScene);
         }
 
         private void Move()

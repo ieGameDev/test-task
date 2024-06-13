@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Logic;
+﻿using Assets.Scripts.Infrastructure.Services.ProgressService;
+using Assets.Scripts.Logic;
 using UnityEngine;
 
 namespace Assets.Scripts.UI
@@ -9,20 +10,21 @@ namespace Assets.Scripts.UI
 
         private IScoreCounter _playerScoreCounter;
         private IScoreCounter _enemyScoreCounter;
+        private ISavedProgress _savedProgress;
 
-        public void Construct(IScoreCounter playerScoreCounter)
+        public void Construct(IScoreCounter playerScoreCounter, IScoreCounter enemyScoreCounter)
         {
             _playerScoreCounter = playerScoreCounter;
-            //_enemyScoreCounter = enemyScoreCounter;
+            _enemyScoreCounter = enemyScoreCounter;
 
             _playerScoreCounter.OnScoreChanged += UpdatePlayerScore;
-            //_enemyScoreCounter.OnScoreChanged += UpdateEnemyScore;
+            _enemyScoreCounter.OnScoreChanged += UpdateEnemyScore;
         }
 
         private void OnDisable()
         {
             _playerScoreCounter.OnScoreChanged -= UpdatePlayerScore;
-            //_enemyScoreCounter.OnScoreChanged -= UpdateEnemyScore;
+            _enemyScoreCounter.OnScoreChanged -= UpdateEnemyScore;
         }
 
         private void UpdatePlayerScore(int score) =>

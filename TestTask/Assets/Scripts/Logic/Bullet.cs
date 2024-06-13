@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.Enemy;
+using Assets.Scripts.Infrastructure.Services;
+using Assets.Scripts.Infrastructure.Services.SaveLoad;
 using Assets.Scripts.Player;
 using System.Collections;
 using UnityEngine;
@@ -9,13 +11,18 @@ namespace Assets.Scripts.Logic
     public abstract class Bullet : MonoBehaviour
     {
         private const string BoundTag = "Bound";
+
         protected abstract string TargetTag { get; }
 
         private Rigidbody _rigidbody;
+        private ISaveLoadService _saveLoadService;
         private Vector3 _lastVelocity;
 
-        private void Awake() =>
+        private void Awake()
+        {
             _rigidbody = GetComponent<Rigidbody>();
+            _saveLoadService = DependencyContainer.Container.Single<ISaveLoadService>();
+        }
 
         private void Update() =>
             _lastVelocity = _rigidbody.velocity;
@@ -32,22 +39,37 @@ namespace Assets.Scripts.Logic
             {
                 if (TargetTag == "Player")
                 {
-                    EnemyScoreCounter enemyScore = FindObjectOfType<EnemyScoreCounter>();
-                    if (enemyScore != null)
-                        enemyScore.IncreaseScore(1);
-                }
-                else if (TargetTag == "Enemy")
-                {
-                    PlayerScoreCounter playerScore = FindObjectOfType<PlayerScoreCounter>();
-                    if (playerScore != null)
-                        playerScore.IncreaseScore(1);
+                    PointToEnemy();
+
+                    _saveLoadService.SaveProgress();
+                    Destroy(gameObject);
                 }
 
-                Destroy(gameObject);
+                else if (TargetTag == "Enemy")
+                {
+                    PointToPlayer();
+
+                    _saveLoadService.SaveProgress();
+                    Destroy(gameObject);
+                }
             }
 
             else if (other.tag == BoundTag)
                 StartCoroutine(DestroyBullet());
+        }
+
+        public void PointToPlayer()
+        {
+            IScoreCounter score = FindObjectOfType<PlayerScoreCounter>();
+            if (score != null)
+                score.IncreaseScore(1);
+        }
+
+        public void PointToEnemy()
+        {
+            IScoreCounter score = FindObjectOfType<EnemyScoreCounter>();
+            if (score != null)
+                score.IncreaseScore(1);
         }
 
         private void RicochetLogic(Collision collision)

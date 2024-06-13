@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Infrastructure.Factory;
-using Assets.Scripts.Infrastructure.Services;
-using Assets.Scripts.Logic;
+﻿using Assets.Scripts.Logic;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy
@@ -16,13 +14,11 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private LayerMask _obstacleMask;
 
         private float _lastAttackTime;
-        private IGameFactory _gameFactory;
         private Transform _playerTransform;
 
-        private void Start()
+        public void Construct(GameObject player)
         {
-            _gameFactory = DependencyContainer.Container.Single<IGameFactory>();
-            _gameFactory.PlayerCreated += PlayerCreated;
+            _playerTransform = player.transform;
         }
 
         private void Update()
@@ -44,9 +40,6 @@ namespace Assets.Scripts.Enemy
 
         private bool CanShoot() =>
             Time.time >= _lastAttackTime + _attackCooldown;
-
-        private void PlayerCreated() => 
-            _playerTransform = _gameFactory.PlayerGameObject.transform;
 
         private void Attack()
         {
