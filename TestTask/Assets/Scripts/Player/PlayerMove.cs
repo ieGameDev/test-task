@@ -27,7 +27,10 @@ namespace Assets.Scripts.Player
         {
             Vector2 input = _inputService.Axis;
             Vector3 move = new Vector3(input.x, 0, input.y);
+            move += Physics.gravity;
+
             Vector3 worldMove = transform.TransformDirection(move);
+
             _characterController.Move(move * _playerSpeed * Time.deltaTime);
         }
 

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Player
     public class PlayerAttack : MonoBehaviour
     {
         [SerializeField] private float _attackCooldown = 1f;
-        [SerializeField] private float _bulletSpeed = 50f;
+        [SerializeField] private float _bulletSpeed = 15f;
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Transform _firePoint;
 

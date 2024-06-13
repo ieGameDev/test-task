@@ -1,6 +1,9 @@
 ﻿using Assets.Scripts.CameraLogic;
 using Assets.Scripts.Infrastructure.Bootstrap;
+using Assets.Scripts.Infrastructure.Factory;
 using Assets.Scripts.Logic;
+using Assets.Scripts.Player;
+using Assets.Scripts.UI;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure.GameStates
@@ -33,13 +36,22 @@ namespace Assets.Scripts.Infrastructure.GameStates
 
         private void OnLoaded()
         {
-            GameObject player = _gameFactory.CreatePlayer(GameObject.FindWithTag(InitialPointTag));
+            GameObject player = InitialPlayer();
 
-            _gameFactory.CreateScoreDisplay();
+            InitialScoreDisplay(player);
 
             CameraFollow(player);
 
             _gameStateMachine.Enter<GameLoopState>();
+        }
+
+        private GameObject InitialPlayer() => 
+            _gameFactory.CreatePlayer(GameObject.FindWithTag(InitialPointTag));
+
+        private void InitialScoreDisplay(GameObject player)
+        {
+            GameObject score = _gameFactory.CreateScoreDisplay();
+            score.GetComponent<ActorUI>().Construct(player.GetComponent<PlayerScoreCounter>());
         }
 
         private void CameraFollow(GameObject player)

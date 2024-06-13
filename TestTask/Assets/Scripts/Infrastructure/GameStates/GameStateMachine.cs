@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrastructure.Bootstrap;
+using Assets.Scripts.Infrastructure.Factory;
 using Assets.Scripts.Infrastructure.Services;
 using Assets.Scripts.Logic;
 using System;

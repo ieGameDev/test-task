@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Enemy;
+using Assets.Scripts.Player;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Logic
@@ -12,24 +14,36 @@ namespace Assets.Scripts.Logic
         private Rigidbody _rigidbody;
         private Vector3 _lastVelocity;
 
-        private void Awake() => 
+        private void Awake() =>
             _rigidbody = GetComponent<Rigidbody>();
 
-        private void Update() => 
+        private void Update() =>
             _lastVelocity = _rigidbody.velocity;
 
         public void Initialize(Vector3 direction, float speed) =>
             _rigidbody.velocity = direction * speed;
 
-        private void OnCollisionEnter(Collision collision) => 
+        private void OnCollisionEnter(Collision collision) =>
             RicochetLogic(collision);
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.tag == TargetTag)
             {
+                if (TargetTag == "Player")
+                {
+                    EnemyScoreCounter enemyScore = FindObjectOfType<EnemyScoreCounter>();
+                    if (enemyScore != null)
+                        enemyScore.IncreaseScore(1);
+                }
+                else if (TargetTag == "Enemy")
+                {
+                    PlayerScoreCounter playerScore = FindObjectOfType<PlayerScoreCounter>();
+                    if (playerScore != null)
+                        playerScore.IncreaseScore(1);
+                }
+
                 Destroy(gameObject);
-                //DestroyEnemyLogic
             }
 
             else if (other.tag == BoundTag)

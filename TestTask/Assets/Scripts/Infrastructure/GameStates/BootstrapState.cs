@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Infrastructure.AssetsManagement;
 using Assets.Scripts.Infrastructure.Bootstrap;
+using Assets.Scripts.Infrastructure.Factory;
 using Assets.Scripts.Infrastructure.Services;
 using Assets.Scripts.Infrastructure.Services.Input;
 
