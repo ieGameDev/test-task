@@ -1,9 +1,7 @@
 ﻿using Assets.Scripts.Logic;
 using System;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 using Assets.Scripts.Data;
-using System.Collections;
 using Assets.Scripts.Infrastructure.Services.ProgressService;
 
 namespace Assets.Scripts.Enemy
@@ -42,12 +40,6 @@ namespace Assets.Scripts.Enemy
         {
             CurrentScore = progress.EnemyScore;
             OnScoreChanged?.Invoke(CurrentScore);
-        }
-
-        public IEnumerator RestartGame()
-        {
-            yield return new WaitForSeconds(1);
-            SceneManager.LoadScene(InitialScene);
         }
     }
 }

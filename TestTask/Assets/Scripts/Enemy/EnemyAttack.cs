@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Logic;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy
@@ -16,15 +17,18 @@ namespace Assets.Scripts.Enemy
         private float _lastAttackTime;
         private Transform _playerTransform;
 
-        public void Construct(GameObject player)
-        {
+        public void Construct(GameObject player) =>
             _playerTransform = player.transform;
-        }
 
         private void Update()
         {
-            if (_playerTransform != null && CanShoot() && CanSeePlayer())
-                Attack();
+            if (_playerTransform != null && CanSeePlayer())
+            {
+                LookAtPlayer();
+
+                if (CanShoot())
+                    Attack();
+            }
         }
 
         public bool CanSeePlayer()
@@ -38,12 +42,14 @@ namespace Assets.Scripts.Enemy
             return distanceToPlayer <= _visionRange;
         }
 
+        private void LookAtPlayer() => 
+            transform.LookAt(_playerTransform);
+
         private bool CanShoot() =>
             Time.time >= _lastAttackTime + _attackCooldown;
 
         private void Attack()
-        {
-            transform.LookAt(_playerTransform);
+        {            
             Shoot();
 
             _lastAttackTime = Time.time;

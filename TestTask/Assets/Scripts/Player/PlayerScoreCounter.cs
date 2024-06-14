@@ -1,10 +1,8 @@
 ﻿using Assets.Scripts.Logic;
 using System;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 using Assets.Scripts.Infrastructure.Services.ProgressService;
 using Assets.Scripts.Data;
-using System.Collections;
 
 namespace Assets.Scripts.Player
 {
@@ -42,12 +40,6 @@ namespace Assets.Scripts.Player
         {
             CurrentScore = progress.PlayerScore;
             OnScoreChanged?.Invoke(CurrentScore);
-        }
-
-        public IEnumerator RestartGame()
-        {
-            yield return new WaitForSeconds(1);
-            SceneManager.LoadScene(InitialScene);
-        }
+        }        
     }
 }
